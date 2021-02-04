@@ -39,10 +39,12 @@
 % elio: don't remember what this was for, but pretty sure it's needed.
 \preto\fullcite{\AtNextCite{\defcounter{maxnames}{99}}}
 
+\usepackage{lipsum}
+
 \renewcommand{\glossarysection}[2][]{}
 
 \makeglossaries
-\input{sections/acronyms}
+%\input{sections/acronyms}
 
 
 \begin{document}
@@ -61,23 +63,23 @@
 \frontmatter
 
 \chapter*{Abstract}
-\input{sections/0-abstract}
+\lipsum[1]
 
 % -----------------
 
 \chapter*{Sammanfattning}
-\input{sections/0-sammanfattning}
+\lipsum[1]
 
 % -----------------
 
 \chapter*{Acknowledgements}
-\input{sections/acknowledgements}
+\lipsum[1]
 
 % -----------------
 
 \chapter*{Publications}
 \label{sec:publications-list}
-\input{sections/publications-list}
+%\input{sections/publications-list}
 
 % -----------------
 
@@ -109,7 +111,7 @@
 
 \chapter{INTRODUCTION}
 \label{ch:introduction}
-\input{sections/1-introduction}
+\lipsum[1]
 
 
 % ====================================
@@ -120,7 +122,7 @@
 
 \chapter{FRAME OF REFERENCE}
 \label{ch:baground}
-\input{sections/3-background}
+\lipsum[1]
 
 
 % ====================================
@@ -131,7 +133,7 @@
 
 \chapter{RESEARCH METHODS}
 \label{ch:method}
-\input{sections/2-method}
+\lipsum[1]
 
 
 % ====================================
@@ -142,7 +144,7 @@
 
 \chapter{MAIN CONTRIBUTIONS}
 \label{ch:contributions}
-\input{sections/4-contributions}
+\lipsum[1]
 
 
 % ====================================
@@ -153,7 +155,7 @@
 
 \chapter{SUMMARY OF PUBLICATIONS}
 \label{ch:publications}
-\input{sections/5-publications}
+\lipsum[1]
 
 
 % ====================================
@@ -164,7 +166,7 @@
 
 \chapter{DISCUSSION}
 \label{ch:discussion}
-\input{sections/6-discussion}
+\lipsum[1]
 
 
 % ====================================
@@ -175,7 +177,7 @@
 
 \chapter{CLOSING REMARKS}
 \label{ch:conclusions}
-\input{sections/7-conclusions}
+\lipsum[1]
 
 
 % ====================================
@@ -192,9 +194,9 @@
 
 \begin{fullarticles}
   % elio: added the last parameter to show paper number before its title.
-  \fullarticle[scale=.8,trim={0mm 5mm 0mm 5mm},clip=true,pages=-]{ventocilla2017}{publications/paper1.pdf}{Paper I}
+  %\fullarticle[scale=.8,trim={0mm 5mm 0mm 5mm},clip=true,pages=-]{ventocilla2017}{publications/paper1.pdf}{Paper I}
 
-  \fullarticle[scale=.72,trim={0mm 5mm 0mm 5mm},clip=true,pages=-]{ventocilla2018}{publications/paper2.pdf}{Paper II}
+  %\fullarticle[scale=.72,trim={0mm 5mm 0mm 5mm},clip=true,pages=-]{ventocilla2018}{publications/paper2.pdf}{Paper II}
 \end{fullarticles}
 
 
