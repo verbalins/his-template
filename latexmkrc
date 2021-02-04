@@ -1,0 +1,1 @@
+$ENV{'TEXINPUTS'}='./dissertation//:' . $ENV{'TEXINPUTS'};

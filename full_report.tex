@@ -1,0 +1,9 @@
+\documentclass{article}
+\RequirePackage{pdfpages}% package to include multi-page PDF files
+
+\begin{document}
+\makeatletter
+\includepdf[pages=1]{Cover.pdf}
+\includepdf[pages=-]{Research_proposal.pdf}
+\includepdf[pages=2]{Cover.pdf}
+\end{document}
