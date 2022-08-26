@@ -1,0 +1,133 @@
+$doc-class.tex()$
+
+$_metadata.tex()$
+
+$pandoc.tex()$
+
+\hypersetup{
+$if(title-meta)$
+  pdftitle={$title-meta$},
+$endif$
+$if(author-meta)$
+  pdfauthor={$author-meta$},
+$endif$
+$if(lang)$
+  pdflang={$lang$},
+$endif$
+$if(subject)$
+  pdfsubject={$subject$},
+$endif$
+$if(keywords)$
+  pdfkeywords={$for(keywords)$$keywords$$sep$, $endfor$},
+$endif$
+$if(colorlinks)$
+  colorlinks=true,
+  linkcolor={$if(linkcolor)$$linkcolor$$else$Maroon$endif$},
+  filecolor={$if(filecolor)$$filecolor$$else$Maroon$endif$},
+  citecolor={$if(citecolor)$$citecolor$$else$Blue$endif$},
+  urlcolor={$if(urlcolor)$$urlcolor$$else$Blue$endif$},
+$else$
+$if(boxlinks)$
+$else$
+  hidelinks,
+$endif$
+$endif$
+  pdfcreator={LaTeX via pandoc}}
+
+$title.tex()$
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Source code with 'minted'
+%%
+%% To show source code listings, make use of the 'minted' package.
+%% The following lines set some reasonable configuration options.
+%% If you do not make use of source code listings in your
+%% dissertation, it is safe to remove those lines.
+
+% \usepackage{minted}
+% \usepackage{MnSymbol}
+% \undef\mathdollar% Remove \mathdollar as defined by MnSymbol to avoid clashes of commands
+% \setminted{%
+% breaklines,% automatically break longer lines at spaces
+% breaksymbolright={\raisebox{-0.4ex}{\ensuremath{\rhookswarrow}}},% show a nice symbol when breaking
+% breaksymbolleft={},% no symbol in the continuing line
+% breakindent=1em,% indent broken lines' continuation
+% linenos=true,% have line numbers
+% tabsize=4,% define the width of tab characters
+% fontfamily=tt,% use mono-spaced font
+% }
+
+%% End of configuration for package 'minted'
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Custom packages and commands
+\usepackage{csquotes, rotating, tikz, subcaption, tabularx, xltabular, ccicons}
+\usetikzlibrary{arrows,arrows.meta,shapes.arrows,positioning,fit,shapes.geometric,decorations.pathreplacing,calc}
+%\tikzexternalize[prefix=tikz/]
+
+\usepackage{unicode-math}
+\setmathfont[Scale=MatchUppercase]{STIX Two Math}
+
+\usepackage[final]{microtype}
+\usepackage{siunitx}
+\sisetup{%
+    detect-all,
+    free-standing-units, 
+    space-before-unit, 
+    use-xspace,
+    group-separator = {,}
+}
+
+\usepackage[capitalize,noabbrev,nameinlink]{cleveref} % Make use of \cref commands
+\creflabelformat{equation}{#1#3#2}
+\graphicspath{{img/}{tex/}} % Defines the path to look for images and plots
+
+\usepackage[shortlabels]{enumitem} % Indentation of lists
+% Fix indentation for lists.
+\setlist[enumerate,1]{leftmargin=0.75cm}
+\renewcommand{\arraystretch}{1.5} % Increased vertical space in tables
+%% End Custom packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+$if(his-metadata.acronyms)$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Abbreviations and references
+% Abbreviations, will automatically be added to the list of abbreviations if used in the text
+% \newacronym{key}{abbreviation}{full name}
+\usepackage[acronym,toc=true,nomain,xindy,style=super,nonumberlist,automake]{glossaries-extra}
+\setabbreviationstyle[acronym]{long-short}
+\makeglossaries
+$for(his-metadata.acronyms)$
+$his-metadata.acronyms$
+$endfor$
+$endif$
+
+% Bibliography to use, easiest to include all references, both your own and other sources
+$for(bibliography)$
+\addbibresource{$bibliography$}
+$endfor$
+
+%% End Abbreviations and references
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+$before-body.tex()$
+$for(include-before)$
+$include-before$
+
+$endfor$
+
+\mainmatter
+
+$body$
+
+$before-bib.tex()$
+
+\backmatter
+
+$for(include-after)$
+$include-after$
+$endfor$
+$after-body.tex()$
+\end{document}

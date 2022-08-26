@@ -1,0 +1,49 @@
+$if(title)$
+\title{$title$}
+$endif$
+$if(subtitle)$
+\subtitle{$subtitle$}
+$endif$
+\author{$author$}
+\date{$date$} % Dissertation date
+$if(his-metadata.seriesnumber)$
+\seriesnumber{$his-metadata.seriesnumber$}% in University of Skövde's 'dissertation series'
+$endif$
+$if(his-metadata.isbn)$
+\isbn{$his-metadata.isbn$} % Publication ISBN
+$endif$
+\printshop{$his-metadata.printshop$}
+
+%% \publicationtype controls whether the document is a
+%% dissertation, licentiate thesis, or a proposal. It determines 
+%% various formatting aspects, such as the default colors (purple vs. grey).
+%% Not to be mixed up with \dissertationtype.
+%% Allowed values are: dissertation, licentiate, thesisproposal, or researchproposal.
+%\publicationtype{dissertation} or \publicationtype{licentiate} or \publicationtype{thesisproposal} or \publicationtype{researchproposal}
+\publicationtype{$his-metadata.publicationtype$}
+
+$if(his-metadata.partnercompany)$
+%% New option, define partner company name and logo.
+%% To be used if you are performing the work in collaboration
+%% with an external company.
+\partnercompany{$his-metadata.partnercompany$}
+$endif$
+$if(his-metadata.partnercompanylogo)$
+\partnercompanylogo{$his-metadata.partnercompanylogo$}
+$endif$
+$if(coverimage)$
+%% New options, the path to an image on the front cover, and an image of you on the back cover.
+\coverimage{$his-metadata.coverimage$}
+$endif$
+$if(his-metadata.coverphoto)$
+\coverphoto{$his-metadata.coverphoto$}
+$endif$
+
+$if(his-metadata.shortabstract)$
+%% Abstract shown on the back of the cover
+\thesissummary{$his-metadata.shortabstract$}
+$endif$
+
+\ifthenelse{\boolean{@usecover}}{
+	\RequirePackage{hiscover}
+}{}

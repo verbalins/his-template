@@ -1,0 +1,42 @@
+project:
+  type: book
+
+book:
+  title: Title for this example thesis
+  author: Author Authorsson
+  date: 2022-08-23
+  abstract: Testing abstract
+  chapters:
+    - index.qmd
+    - part: "Introduction"
+      chapters:
+        - intro.qmd
+        - summary.qmd
+
+bibliography: references.bib
+
+format:
+  his-pdf:
+    keep-tex: true
+    classoption:
+      - english
+      - final
+      - cover
+  his-html: default
+
+his-metadata:
+  coverimage: foto.jpg
+  coverphoto: face.jpg
+  publicationtype: licentiate
+  fullarticles: |
+    \fullarticle[scale=.9,trim={0mm 5mm 0mm 5mm},pages=-]{fischer2017doctoraldissertationmanual}{style-guide/manual.pdf}[\href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{\ccbyncnd}]
+    \fullarticle[scale=.9,trim={0mm 5mm 0mm 5mm},pages=1]{fischer2017doctoraldissertationmanual}{style-guide/manual.pdf}[\copyright{} 2018 University of Skövde. Reprinted, with permission, from]
+    \fullarticle[scale=.9,trim={0mm 5mm 0mm 5mm},pages=1]{fischer2017doctoraldissertationmanual}{style-guide/manual.pdf}[Reprinted from][with permission from University of Skövde.]
+  acronyms: |
+    \newacronym{moo}{MOO}{Multi-Objective Optimization}
+    \newacronym{sbo}{SBO}{Simulation-Based Optimization}
+    \newacronym{ai}{AI}{Artificial Intelligence}
+    \newacronym{doe}{DOE}{Design of Experiments}
+  ownpublications: |
+    \authorspublication{fischer2017doctoraldissertationmanual}
+    \authorspublication[Design, manuscript preparation, review]{fischer2017doctoraldissertationmanual}

@@ -1,0 +1,8 @@
+# Introduction
+
+This is a book created from markdown and executable code. See @knuth84 for additional discussion of literate programming. Here's a nice photo of people outside the university in @fig-photo.
+
+![A photo of people outside the university.](foto.jpg){#fig-photo}
+
+## Second level heading
+Testing some text here as well with more references @Walley2000, @landis1977measureobserveragreement. Here's an abbreviation \gls{moo}.

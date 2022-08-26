@@ -1,0 +1,77 @@
+% Declare new bibliography field 'urn' for the Uniform Resource Name
+%\DeclareDatamodelFields[type=field,datatype=literal]{urn}
+% Use field 'urn' for all entries: article, book, misc, ...
+\DeclareDatamodelEntryfields{urn}
+\DeclareDatamodelEntrytypes{histhesis}
+\DeclareDatamodelEntrytypes{histhesisnew}
+
+\DeclareDatamodelFields[type=field,datatype=literal,nullok=true]{disstype}
+\DeclareDatamodelEntryfields{disstype}
+
+\DeclareFieldFormat{urn}{\ifhyperref{%
+    % Use 'URN-Service der Deutschen Nationalbibliothek' to get homepage of URN
+    \href{http://www.nbn-resolving.org/#1}{\nolinkurl{#1}}%
+}{%
+    \nolinkurl{#1}%
+    }%
+}
+
+% Copy&paste inherited from standard.bbx for regular 'thesis'
+% entries. Main change is the change of name to 'histhesis'
+% and adding a print statement for series and number, resulting
+% in text like 'Dissertation Series, No. X'.
+% See as well hisbibliography.sty
+\DeclareBibliographyDriver{histhesis}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author}%
+  \setunit{\printdelim{nametitledelim}}\newblock
+  \usebibmacro{title}%
+  \newunit
+  \printlist{language}%
+  \newunit\newblock
+  \usebibmacro{byauthor}%
+  \newunit\newblock
+  \printfield{note}%
+  \newunit\newblock
+  \printfield{type}%
+  \newunit\newblock
+  \printfield{series}, No.~\printfield{number}%
+  \newunit
+  \usebibmacro{institution+location+date}%
+  \newunit\newblock
+  \usebibmacro{chapter+pages}%
+  \newunit
+  \printfield{pagetotal}%
+  \newunit\newblock
+  \iftoggle{bbx:isbn}
+    {\printfield{isbn}}
+    {}%
+  \newunit\newblock
+  \usebibmacro{doi+eprint+url}%
+  \newunit\newblock
+  \usebibmacro{addendum+pubstate}%
+  \setunit{\bibpagerefpunct}\newblock
+  \usebibmacro{pageref}%
+  \newunit\newblock
+  \iftoggle{bbx:related}
+    {\usebibmacro{related:init}%
+     \usebibmacro{related}}
+    {}%
+  \usebibmacro{finentry}}
+
+% CHANGED: New format for dissertation series, heavily altered by AMK
+\DeclareBibliographyDriver{histhesisnew}{%
+  \usebibmacro{bibindex}%
+  \usebibmacro{begentry}%
+  \usebibmacro{author}%
+  \setunit{\printdelim{nametitledelim}}\newblock
+  \usebibmacro{title}, Informatics% CHANGED: Insert informatics after title
+  \newunit\newblock
+  \printfield{disstype}% CHANGED Dissertation type is defined depending on entry field, @phdthesis or @misc
+  \iftoggle{bbx:isbn}
+    {, \printfield{isbn}}
+    {}%
+  \usebibmacro{finentry}}
+
+\endinput
