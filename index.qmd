@@ -1,7 +1,6 @@
-::: {.content-visible when-format="html"}
+::: {.ignore-div .pdf}
 # Index {.unnumbered}
+This should only be visible when outputting as HTML.
 
-This is a Quarto book.
-
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+You can use this to show information about your thesis not visible in your printed copy. 
 :::
