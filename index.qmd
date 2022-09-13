@@ -1,4 +1,4 @@
-::: {.ignore-div .pdf}
+::: {.ignore-div}
 # Index {.unnumbered}
 This should only be visible when outputting as HTML.
 
