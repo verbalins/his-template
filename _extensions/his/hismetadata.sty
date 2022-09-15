@@ -1,0 +1,174 @@
+%%
+%% Copyright 2016-2018 by Thomas Fischer <thomas.fischer@his.se>
+%%
+%% This file has been released under the following license:
+%% Creative Commons Attribution-Share Alike 4.0 Unported
+%% (CC-BY-SA 4.0)
+%%
+%% hismetadata.sty is a package that defines commands
+%% metadata like author's name, thesis title, etc
+%%
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{hismetadata}[2018/06/20 University of Skovde Thesis Metadata by Thomas Fischer]
+
+\RequirePackage{ifthen}
+\RequirePackage[table,svgnames,dvipsnames,xcdraw]{xcolor}
+\RequirePackage[nopagecolor={white}]{pagecolor}
+\usepackage{xstring}
+\RequirePackage{hyperref}% used to set a PDF file's title and author
+\hypersetup{unicode=true,pdfborder={0 0 0},breaklinks=false,bookmarksnumbered}
+
+\newcommand{\missingparam}[1]{\colorbox{red!30}{{\normalfont\textbf{\textbackslash{}#1}\ not set}}}
+
+\newcommand{\@year}{\missingparam{date}}
+\newcommand{\@month}{\missingparam{date}}
+\newcommand{\@day}{\missingparam{date}}
+\renewcommand\date[1]{%
+\renewcommand{\@year}{\StrLeft{#1}{4}}%
+\renewcommand{\@month}{\StrMid{#1}{5}{8}}%
+\renewcommand{\@day}{\StrRight{#1}{2}}%
+}
+
+\newcommand{\@seriesnumber}{\missingparam{seriesnumber}}
+\newcommand{\seriesnumber}[1]{\renewcommand\@seriesnumber{#1}}
+
+\newcommand{\@subtitle}{~}% subtitle cannot be empty, would give compilation errors
+\newcommand{\@subtitleUC}{~}% subtitle cannot be empty, would give compilation errors
+\newcommand{\subtitle}[1]{\renewcommand{\@subtitleUC}{\MakeUppercase{#1}}\renewcommand\@subtitle{#1}}
+
+\newcommand\@subject{\missingparam{subject}}
+\newcommand\subject[1]{\renewcommand\@subject{#1}}
+\subject{Informatics}
+
+\renewcommand{\@title}{\missingparam{title}}
+\newcommand{\@titleUC}{\missingparam{title}}
+\renewcommand{\title}[1]{\renewcommand{\@titleUC}{\MakeUppercase{#1}}\renewcommand{\@title}{#1}%
+\hypersetup{pdftitle={#1}}%
+}
+%
+\renewcommand{\@author}{\missingparam{author}}
+\newcommand{\@authorUC}{\missingparam{author}}
+\renewcommand{\author}[1]{\renewcommand{\@authorUC}{\MakeUppercase{#1}}\renewcommand{\@author}{#1}%
+\hypersetup{pdfauthor={#1}}%
+}
+%
+\newcommand{\@spokenlanguage}{\missingparam{spokenlanguage}}
+\newcommand{\spokenlanguage}[1]{\renewcommand{\@spokenlanguage}{#1}}
+%
+\newcommand{\@opponent}{\missingparam{opponent}}
+\newcommand{\opponent}[1]{\renewcommand{\@opponent}{#1}}
+%
+\newcommand{\@dissertationtype}{\missingparam{dissertationtype}}
+\newcommand{\dissertationtype}[1]{\renewcommand{\@dissertationtype}{#1}}
+%
+\newcommand{\@dissertationarea}{\missingparam{dissertationarea}}
+\newcommand{\dissertationarea}[1]{\renewcommand{\@dissertationarea}{#1}}
+\dissertationarea{\@subject}
+%
+\newcommand{\@decidedby}{}% no warning here, this value is optional
+\newcommand{\decidedby}[1]{\renewcommand{\@decidedby}{#1}}
+%
+\newcommand{\@defensedaytimeroom}{\missingparam{defensedaytimeroom}}
+\newcommand{\defensedaytimeroom}[6]{\renewcommand\@defensedaytimeroom{#1dagen den #2\ #3\ #4 kl.~#5, #6}}
+%
+\newcommand{\@isbn}{\missingparam{isbn}}
+\newcommand{\isbn}[1]{\renewcommand{\@isbn}{#1}}
+%
+\newcommand{\@printshop}{\missingparam{printshop}}
+\newcommand{\printshop}[1]{\renewcommand{\@printshop}{#1}}
+
+\definecolor{specialpagebackground}{RGB}{15,191,0}% default value if nothing else is set
+
+\definecolor{rubin}{RGB}{62,29,64}
+\definecolor{safir}{RGB}{0,44,66}
+\definecolor{smaragd}{RGB}{43,59,17}
+\definecolor{topas}{RGB}{72,45,24}
+\definecolor{grafit}{RGB}{49,53,56}
+
+\newcommand{\@publicationtypelong}{\missingparam{publicationtypelong}}
+\newcommand{\publicationtypelong}[1]{\renewcommand{\@publicationtypelong}{#1}}
+%% To differ between doctoral dissertations (default) and licentiates:
+%% Use either
+%%    \publicationtype{dissertation}
+%% or
+%%    \publicationtype{licentiate}
+%% or
+%%    \publicationtype{thesisproposal}
+%% or
+%%    \publicationtype{researchproposal}
+\newcommand{\@publicationtype}{}
+\newcommand{\publicationtype}[1]{%
+% Whenever a new publication type is set, redefine special page color
+\ifthenelse{\equal{#1}{licentiate}}{%
+% If publication is a licentiate thesis
+%\definecolor{specialpagebackground}{RGB}{94,97,100}% grey
+    \definecolor{specialpagebackground}{RGB}{129,134,142} % CHANGED grey
+    \definecolor{specialpagebackgroundcover}{RGB}{49,61,70} % CHANGED Cover background
+}{\ifthenelse{\equal{#1}{dissertation}}{%
+% If publication is a doctoral thesis
+%\definecolor{specialpagebackground}{RGB}{86,34,97}% purple 
+    \definecolor{specialpagebackground}{RGB}{133,105,140}% CHANGED purple 
+    \definecolor{specialpagebackgroundcover}{RGB}{133,105,140}% CHANGED purple 
+}{\ifthenelse{\equal{#1}{thesisproposal}}{%
+% Color for 'thesisproposal'
+    \definecolor{specialpagebackground}{RGB}{0,44,66}% TODO settle with some color for
+    \definecolor{specialpagebackgroundcover}{RGB}{0,44,66}% CHANGED other color for the cover
+}
+{% Color for 'researchproposal'
+    \definecolor{specialpagebackground}{RGB}{43,59,17}% TODO settle with some color for
+    \definecolor{specialpagebackgroundcover}{RGB}{43,59,17}% CHANGED other color for the cover
+}
+}%
+}%
+\renewcommand{\@publicationtype}{#1}%
+
+\IfStrEq*{\languagename}{english}{
+	\ifthenelse{\equal{\@publicationtype}{researchproposal}}{\publicationtypelong{Research Proposal}}{
+	\ifthenelse{\equal{\@publicationtype}{thesisproposal}}{\publicationtypelong{Thesis Proposal}}{
+	\ifthenelse{\equal{\@publicationtype}{licentiate}}{\publicationtypelong{Licentiate Thesis}}{
+	\publicationtypelong{Doctoral Dissertation}
+	}
+	}
+	}
+}{
+	\ifthenelse{\equal{\@publicationtype}{researchproposal}}{\publicationtypelong{Forskningsförslag}}{
+	\ifthenelse{\equal{\@publicationtype}{thesisproposal}}{\publicationtypelong{Avhandlingsförslag}}{
+	\ifthenelse{\equal{\@publicationtype}{licentiate}}{\publicationtypelong{Licentiatexamen}}{
+	\publicationtypelong{Doktorsavhandling}
+	}
+	}
+	}
+}
+%
+% Update page background color for cover document
+\@ifclassloaded{hiscover}{% take special action about page color if being used in 'hiscover' class
+\renewcommand{\nopagecolor}{specialpagebackgroundcover}%
+\newpagecolor{specialpagebackgroundcover}%
+}% end of 'then' for @ifclassloaded
+{}% nothing in 'else'
+}
+
+% CHANGE Add partner company information and logo
+\newcommand{\@partnercompany}{\missingparam{partnercompany}}
+\newcommand{\partnercompany}[1]{\renewcommand{\@partnercompany}{#1}}
+
+\newcommand{\@partnercompanylogo}{\missingparam{partnercompanylogo}}
+\newcommand{\partnercompanylogo}[1]{\renewcommand{\@partnercompanylogo}{#1}}
+
+% CHANGE Add thesis abstract for back cover and spik
+\newcommand{\@thesissummary}{\missingparam{thesissummary}}
+\newcommand{\thesissummary}[1]{\renewcommand{\@thesissummary}{#1}}
+
+\newcommand{\@coverimage}{\missingparam{coverimage}}
+\newcommand{\coverimage}[1]{\renewcommand{\@coverimage}{#1}}
+
+\newcommand{\@coverphoto}{\missingparam{coverphoto}}
+\newcommand{\coverphoto}[1]{\renewcommand{\@coverphoto}{#1}}
+
+% Inputs here
+
+\newboolean{@iscollaboration}
+\ifthenelse{\equal{\@partnercompany}{\missingparam{partnercompany}} \OR \equal{\@partnercompanylogo}{\missingparam{partnercompanylogo}}}
+{\setboolean{@iscollaboration}{false}}{\setboolean{@iscollaboration}{true}}
+\newcommand{\iscollaboration}[2]{\ifthenelse{\boolean{@iscollaboration}}{#1}{#2}}
