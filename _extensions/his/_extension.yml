@@ -30,6 +30,7 @@ contributes:
         - "partials/after-body.tex"
       format-resources:
         - his-thesis.cls
+        - his-thesis10.clo
         - hismetadata.sty
         - hisbibliography.sty
         - histextformatting.sty
