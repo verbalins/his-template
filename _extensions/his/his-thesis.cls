@@ -373,10 +373,8 @@
 
 % CHANGE Now allows for additional optional parameters. 
 % #1 is upper text, #2 is middle text, and #3 is lower text. #1 and #3 are optional.
-\NewDocumentCommand \partlike{o m o}{% CHANGE Now allows for additional optional parameters.
+\NewDocumentCommand\partlike{O{}mO{}}{% CHANGE Now allows for additional optional parameters.
   \@beginpart
-   %\vspace{34.74mm}%
-   \vspace*{44mm}% CHANGE Should be 70mm from top of paper
    \begingroup\color{white}\raggedleft% \RaggedLeft
    \IfNoValueTF{#1}%
         {\begingroup\fontarial{13.5}{15.0} \par\endgroup}%
@@ -393,8 +391,6 @@
 % see: http://www.tex.ac.uk/FAQ-twooptarg.html
 \newcommand{\partlikeRelay}[2][]{%
   \@beginpart
-   %\vspace{34.74mm}%
-   \vspace*{44mm}% CHANGE Should be 70mm from top of paper
    \begingroup\color{white}\raggedleft% \RaggedLeft
    \ifthenelse{\equal{\OptArgPartlike}{}}{}{\begingroup\fontarial{13.5}{15.0}\OptArgPartlike\par\endgroup}%
    \begingroup\fontarial{16.5}{21.0}#2\par\endgroup%
@@ -407,20 +403,28 @@
   \secdef\@part\@spart}% for part*, use @spart, for non-star part use @part
 
 %% The actual formatting of the title of the part
-\def\@part[#1]#2{%
-    \@beginpart
-    \ifnum \c@secnumdepth >-2\relax
-      \refstepcounter{part}%
+%\def\@part[#1]#2{%
+%    \@beginpart
+%    \ifnum \c@secnumdepth >-2\relax
+%      \refstepcounter{part}%
       %\addcontentsline{toc}{part}{\thepart.\hspace{1em}\texorpdfstring{\MakeUppercase{#1}}{#1}}%
-      \addcontentsline{toc}{part}{\thepart.\texorpdfstring{\MakeUppercase{#1}}{#1}}%
-    \else
-      \addcontentsline{toc}{part}{\texorpdfstring{\MakeUppercase{#1}}{#1}}%
-    \fi
+%      \addcontentsline{toc}{part}{\thepart.\texorpdfstring{\MakeUppercase{#1}}{#1}}%
+%    \else
+%      \addcontentsline{toc}{part}{\texorpdfstring{\MakeUppercase{#1}}{#1}}%
+%    \fi
      %\vspace{34.74mm}%
-     \vspace*{44mm}% CHANGE Should be 70mm from top of paper
+     %\vspace*{44mm}% CHANGE Should be 70mm from top of paper
+%     \begingroup\color{white}\raggedleft% \RaggedLeft
+%     \begingroup\fontarial{13.5}{15.0}\MyUpperCase{\partname\hspace{0.5em}\thepart}\par\endgroup%
+%     \begingroup\fontarial{16.5}{21.0}\MyUpperCase{#2}\par\endgroup%
+%     \endgroup%
+%    \@endpart%
+%}
+
+\def\@part[#1]#2{%
+	\@beginpart
      \begingroup\color{white}\raggedleft% \RaggedLeft
-     \begingroup\fontarial{13.5}{15.0}\MyUpperCase{\partname\hspace{0.5em}\thepart}\par\endgroup%
-     \begingroup\fontarial{16.5}{21.0}\MyUpperCase{#2}\par\endgroup%
+     \begingroup\fontarial{16.5}{21.0}\MyUpperCase{#1}\par\endgroup%
      \endgroup%
     \@endpart%
 }
@@ -428,8 +432,6 @@
 %% The actual formatting of the title of the part (star form)
 \def\@spart#1{%
     \@beginpart
-     %\vspace{34.74mm}%
-     \vspace*{44mm}% CHANGE Should be 70mm from top of paper
      \begingroup\color{white}\raggedleft% \RaggedLeft
      \begingroup\fontarial{16.5}{21.0}\MyUpperCase{#1}\par\endgroup%
      \endgroup%
@@ -448,15 +450,18 @@
     }{%
       % In non-final mode, i.e. when printing on A4, do not change paper size
     }
-    \null\vfil
+    \null%\vfill
     % Define a dark purple color used for page backgrounds
     \newpagecolor{specialpagebackground}%
     \markboth{}{}% no page header
     \thispagestyle{empty}% no page numbers on just this page
+	%\vspace{34.74mm}%
+    \vspace*{44mm}% CHANGE Should be 70mm from top of paper
 }
 
 %% The actual formatting of the end of the part (both star and non-star forms)
-\def\@endpart{\vfill
+\def\@endpart{%
+    \vfill
     \isdissertation{\newpage}{}%
     \null%
     \thispagestyle{empty}%

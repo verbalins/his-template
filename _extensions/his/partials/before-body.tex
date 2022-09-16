@@ -66,12 +66,13 @@ $endif$
 $if(his-metadata.ownpublications)$
 % Can be formatted in different ways, see the manual.
 \begin{ownpublications}
-%\highrelevancepublications{fischer2017doctoraldissertationmanual,fischer2017doctoraldissertationmanual}
+	%\highrelevancepublications{fischer2017doctoraldissertationmanual,fischer2017doctoraldissertationmanual}
 	%\lowrelevancepublications{}
 	%\authorspublication[Authors contribution]{fischer2017doctoraldissertationmanual}
 	$for(his-metadata.ownpublications)$
 	$his-metadata.ownpublications$
 	$endfor$
+
 \end{ownpublications}
 $endif$
 

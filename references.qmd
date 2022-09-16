@@ -1,4 +1,7 @@
+::: {.ignore-div}
 # References {.unnumbered}
 
 ::: {#refs}
+:::
+
 :::

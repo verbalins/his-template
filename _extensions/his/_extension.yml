@@ -46,5 +46,13 @@ contributes:
       lof: true
       lot: true
       english: true
+      execute:
+        echo: false
+        warning: false
+      filters:
+        - ignore_index.lua
     html:
       theme: cosmo
+      code-fold: true
+      code-summary: "Show the code"
+      code-link: true
