@@ -1,0 +1,47 @@
+# Background
+
+This is the background chapter. Here we will show how to include figures and create figures from data. We start by showing how to include data.
+
+## Including data
+
+Here's more text in a subsection. @fig-airquality further explores the impact of temperature on ozone level.
+
+```{r}
+#| label: fig-airquality
+#| fig-cap: Temperature and ozone level.
+#| warning: false
+
+library(ggplot2)
+
+ggplot(airquality, aes(Temp, Ozone)) + 
+  geom_point() + 
+  geom_smooth(method = "loess"
+)
+```
+
+## Customizing figures
+
+In the introduction we showed how to include a picture, here we will see how we can customize figure output. See [https://quarto.org/docs/authoring/figures.html](https://quarto.org/docs/authoring/figures.html) for further information about including figures.
+
+::: {#fig-photos layout-ncol=2}
+
+![Face](face.jpg){#fig-face}
+
+![Foto](foto.jpg){#fig-foto}
+
+Example pictures
+:::
+
+## Subcaptions from code
+
+```{r}
+#| label: fig-charts
+#| fig-cap: Charts
+#| fig-subcap: 
+#|   - "Cars"
+#|   - "Pressure"
+#| layout-ncol: 2
+
+plot(cars)
+plot(pressure)
+```
