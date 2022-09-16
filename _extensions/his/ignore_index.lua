@@ -3,3 +3,9 @@ function Div(element)
       return {}
   end
 end
+
+function Header(element)
+  if element.identifier == "index" and quarto.doc.isFormat('pdf') then
+      return {}
+  end
+end
