@@ -4,6 +4,7 @@ version: 0.0.1
 contributes:
   format:
     common:
+      date-format: iso
       number-sections: true
       toc: true
       reference-section-title: References
