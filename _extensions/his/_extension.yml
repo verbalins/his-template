@@ -1,6 +1,6 @@
 title: University of Skövde Thesis template
 author: Simon Lidberg
-version: 0.0.1
+version: 0.0.2
 contributes:
   format:
     common:
@@ -9,7 +9,7 @@ contributes:
       toc: true
       reference-section-title: References
       his-metadata:
-        sammanfattning: "Abstract in swedish"
+        sammanfattning: "Abstract in Swedish"
         publicationtype: dissertation
         printshop: "Stema Specialtryck AB, Borås"
         isbn: 123-12-123456-X-X
@@ -30,15 +30,9 @@ contributes:
         - "partials/before-body.tex"
         - "partials/after-body.tex"
       format-resources:
-        - his-thesis.cls
-        - his-thesis10.clo
-        - hismetadata.sty
-        - hisbibliography.sty
-        - histextformatting.sty
-        - hisownpublications.sty
-        - hisfont.sty
-        - hiscover.sty
-        - histitlepage.sty
+        - "template/his-thesis.cls"
+        - "template/his-thesis10.clo"
+        - "template/his-thesis10.dbx"
         - logos/
       pdf-engine: lualatex
       latex-min-runs: 3
