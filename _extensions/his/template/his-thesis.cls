@@ -97,7 +97,7 @@
 	% If publication is a doctoral thesis
 	%\definecolor{specialpagebackground}{RGB}{86,34,97}% purple 
 		\definecolor{specialpagebackground}{RGB}{133,105,140}% CHANGED purple 
-		\definecolor{specialpagebackgroundcover}{RGB}{133,105,140}% CHANGED purple 
+		\definecolor{specialpagebackgroundcover}{RGB}{86,34,97}% CHANGED purple 
 	}{\ifthenelse{\equal{#1}{thesisproposal}}{%
 	% Color for 'thesisproposal'
 		\definecolor{specialpagebackground}{RGB}{0,44,66}% TODO settle with some color for
@@ -130,11 +130,11 @@
 	}
 	%
 	% Update page background color for cover document
-	\ifthenelse{\boolean{@usecover}}{%
-		\renewcommand{\nopagecolor}{specialpagebackgroundcover}%
-		\newpagecolor{specialpagebackgroundcover}%
-	}% end of 'then' for if @usecover
-	{}% nothing in 'else'
+	%\ifthenelse{\boolean{@usecover}}{%
+		%\renewcommand{\nopagecolor}{specialpagebackgroundcover}%
+		%\newpagecolor{specialpagebackgroundcover}%
+	%}% end of 'then' for if @usecover
+	%{}% nothing in 'else'
 }
 
 % CHANGE Add partner company information and logo
@@ -250,19 +250,7 @@
 \RequirePackage{ragged2e}
 \RequirePackage[overload]{textcase}% FIXME necessary?
 
-\RequirePackage{luaimageembed}
-
-%\RequirePackage[useregional]{datetime2}
-\def\getYear#1{\StrRight{#1}{4}}
-\newcommand{\@year}{\getYear{\@date}}
-%\newcommand{\@month}{\missingparam{dissertationdate}}
-%\newcommand{\@day}{\missingparam{dissertationdate}}
-%\newcommand\dissertationdate[1]{%
-%	\DTMsavedate{dissertationdate}{#1}
-%	\renewcommand{\@year}{\getdateyear{dissertationdate}}%
-%	\renewcommand{\@month}{\getdatemonth{dissertationdate}}%
-%	\renewcommand{\@day}{\getdateday{dissertationdate}}%
-%}
+%\RequirePackage{luaimageembed}
 
 %% Define page size and margins
 \isdissertation{% CHANGE New option for research proposals, run with A4 size
@@ -1922,7 +1910,7 @@ luatexbase.add_to_callback("post_linebreak_filter",orangebox,"orangebox")
 		};
 		\node[rotate=-90,below=3mm of title.east,anchor=west,color=white](year){%
 			\begingroup\color{white}\fontarial{8.5}{8.5}%
-			\@year%
+			\@date%
 			\par\endgroup
 		};
 	\end{tikzpicture}%
@@ -2024,7 +2012,7 @@ luatexbase.add_to_callback("post_linebreak_filter",orangebox,"orangebox")
 		  \node[text width=88mm,align=flush center,below=169mm of photo.north west,anchor=north west](number) {%
 		  \begingroup\fontarial{8.5}{11}%
 		  ISBN \@isbn\\%
-		  Dissertation Series, No.~\@seriesnumber~(\@year)%
+		  Dissertation Series, No.~\@seriesnumber~(\@date)%
 		  \par\endgroup%
 		  };% end of \node(number)
 		}{}%
@@ -2107,20 +2095,20 @@ luatexbase.add_to_callback("post_linebreak_filter",orangebox,"orangebox")
 	\begingroup%
 	{\centering%
 		\fontgeorgia{11.5}{14}%
-		\@author, \@year%
+		\@author, \@date%
 		\smallskip\par%
 		{\fontgeorgia{9.5}{12}\@publicationtypelong\smallskip\par}%
 		{\fontgeorgia{12}{15}\textit{Title:} \@title\par}%
 		{\fontgeorgia{8.5}{10}\ifthenelse{\equal{\@subtitle}{}}{}{\@subtitle\par}}%
 		\medskip%
-		University of Skövde \@year, Sweden\\%
+		University of Skövde \@date, Sweden\\%
 		\href{https://www.his.se/}{www.his.se}
 		\isdissertation{%
 			\bigskip\par%
 			\textit{Printer:} \@printshop
 			\medskip\par%
 			ISBN \@isbn\par%
-			Dissertation Series No. \@seriesnumber~(\@year)%
+			Dissertation Series No. \@seriesnumber~(\@date)%
 		}{%
 		}
 	\par}%
@@ -2247,7 +2235,6 @@ luatexbase.add_to_callback("post_linebreak_filter",orangebox,"orangebox")
     \fussy
     \ifthenelse{\boolean{@usecover}}{%
 		\isdissertation{\cleardoublepage}{\clearpage}
-        \renewcommand{\nopagecolor}{specialpagebackgroundcover}%
         \newpagecolor{specialpagebackgroundcover}%
 		\pagestyle{empty}
 		\ifthenelse{\boolean{@isfinal}}{}{
@@ -2261,7 +2248,6 @@ luatexbase.add_to_callback("post_linebreak_filter",orangebox,"orangebox")
 		}{%
 		}
         \internallastpage{\@coverphoto}%
-        \restorepagecolor
     }{}
 }
 
@@ -2297,7 +2283,7 @@ luatexbase.add_to_callback("post_linebreak_filter",orangebox,"orangebox")
 \setlist[itemize,1]{leftmargin=0.75cm}
 
 \usepackage{hyperref}
-\input{metadata}
+%\input{metadata}
 
 \newboolean{@iscollaboration}
 \ifthenelse{\equal{\@partnercompany}{\missingparam{partnercompany}} \OR \equal{\@partnercompanylogo}{\missingparam{partnercompanylogo}}}

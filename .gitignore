@@ -3,3 +3,12 @@
 *.cls
 _book/
 .quarto/
+background_files/
+/.quarto/
+*.dbx
+*.clo
+*.acn
+*.xdy
+face.jpg
+foto.jpg
+manual.pdf

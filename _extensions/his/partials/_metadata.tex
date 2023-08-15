@@ -31,7 +31,7 @@ $endif$
 $if(his-metadata.partnercompanylogo)$
 \partnercompanylogo{$his-metadata.partnercompanylogo$}
 $endif$
-$if(coverimage)$
+$if(his-metadata.coverimage)$
 %% New options, the path to an image on the front cover, and an image of you on the back cover.
 \coverimage{$his-metadata.coverimage$}
 $endif$
@@ -43,7 +43,3 @@ $if(his-metadata.shortabstract)$
 %% Abstract shown on the back of the cover
 \thesissummary{$his-metadata.shortabstract$}
 $endif$
-
-\ifthenelse{\boolean{@usecover}}{
-	\RequirePackage{hiscover}
-}{}

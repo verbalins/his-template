@@ -1,29 +1,15 @@
 % Start of back matter, appendix, list of references, included full text articles, and list of previous dissertations
 % List of references and list of previous dissertations are automatically placed using the backmatter environment, only the fullarticles environment is needed.
-\sloppy
-\listofreferences
-
-$if(his-metadata.fullarticles)$
-% Example of including full text articles in the manuscript.
-% It's possible to specify what is written both before the reference and after.
-% \fullarticle[includepdf options]{reference}{pdf-file}[before][after]
-\begin{fullarticles}
-$for(his-metadata.fullarticles)$
-$his-metadata.fullarticles$
-$endfor$
-\end{fullarticles}
-$endif$
-
-\dissertationlist
-\fussy
-\ifthenelse{\boolean{@usecover}}{%
-	\isdissertation{\cleardoublepage}{\clearpage}
-        \renewcommand{\nopagecolor}{specialpagebackgroundcover}%
-        \newpagecolor{specialpagebackgroundcover}%
-	\pagestyle{empty}
-	\eject \pdfpagewidth 198mm \pdfpageheight 250mm% Set paper size to 198mm x 250mm
-	\newpage
-        \internalbookspine
-        \internallastpage{$his-metadata.coverphoto$}%
-        \restorepagecolor
-}{}
+\begin{backmatter}
+  $if(his-metadata.fullarticles)$
+  % Example of including full text articles in the manuscript.
+  % It's possible to specify what is written both before the reference and after.
+  % \fullarticle[includepdf options]{reference}{pdf-file}[before][after]
+  \begin{fullarticles}
+  $for(his-metadata.fullarticles)$
+    $his-metadata.fullarticles$
+  $endfor$
+  
+  \end{fullarticles}
+  $endif$
+\end{backmatter}

@@ -2,8 +2,6 @@ $doc-class.tex()$
 
 $_metadata.tex()$
 
-$pandoc.tex()$
-
 \hypersetup{
 $if(title-meta)$
   pdftitle={$title-meta$},
@@ -33,8 +31,6 @@ $else$
 $endif$
 $endif$
   pdfcreator={LaTeX via pandoc}}
-
-$title.tex()$
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Source code with 'minted'
@@ -83,10 +79,10 @@ $title.tex()$
 \creflabelformat{equation}{#1#3#2}
 \graphicspath{{img/}{tex/}} % Defines the path to look for images and plots
 
-\usepackage[shortlabels]{enumitem} % Indentation of lists
+%\usepackage[shortlabels]{enumitem} % Indentation of lists
 % Fix indentation for lists.
-\setlist[enumerate,1]{leftmargin=0.75cm}
-\renewcommand{\arraystretch}{1.5} % Increased vertical space in tables
+%\setlist[enumerate,1]{leftmargin=0.75cm}
+%\renewcommand{\arraystretch}{1.5} % Increased vertical space in tables
 %% End Custom packages
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -118,16 +114,13 @@ $include-before$
 
 $endfor$
 
-\mainmatter
-
 $body$
 
 $before-bib.tex()$
-
-\backmatter
 
 $for(include-after)$
 $include-after$
 $endfor$
 $after-body.tex()$
+
 \end{document}

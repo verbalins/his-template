@@ -1,8 +1,9 @@
 title: University of Skövde Thesis template
 author: Simon Lidberg
 version: 0.0.2
+quarto-required: ">= 1.4.0"
 contributes:
-  format:
+  formats:
     common:
       date-format: iso
       number-sections: true
@@ -26,13 +27,12 @@ contributes:
       template-partials: 
         - "partials/doc-class.tex"
         - "partials/_metadata.tex"
-        - "partials/title.tex"
         - "partials/before-body.tex"
         - "partials/after-body.tex"
       format-resources:
         - "template/his-thesis.cls"
+        - "template/his-thesis.dbx"
         - "template/his-thesis10.clo"
-        - "template/his-thesis10.dbx"
         - logos/
       pdf-engine: lualatex
       latex-min-runs: 3
@@ -46,6 +46,7 @@ contributes:
         warning: false
       filters:
         - ignore_index.lua
+        - format_date.lua
     html:
       theme: cosmo
       code-fold: true

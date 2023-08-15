@@ -1,71 +1,21 @@
-\ifthenelse{\boolean{@usecover}}{%
-	\publicationtype{$his-metadata.publicationtype$}
-	\eject \pdfpagewidth 176mm \pdfpageheight 250mm% Set paper size to 176mm x 250mm
-	\newgeometry{margin=20mm,top=45mm,bottom=10mm}
-	\renewcommand{\nopagecolor}{specialpagebackgroundcover}%
-	\newpagecolor{specialpagebackgroundcover}%
-	\pagestyle{empty}
-	\newpage
-	\internalcoverpage{$his-metadata.coverimage$}
-	\newpage
-	\restorepagecolor
-	\eject
-	\pdfpagewidth = \paperwidth
-	\pdfpageheight = \paperheight
-	\restoregeometry
-}{}
-
-\frontmatter
-
-$if(title)$
-\maketitle
-$endif$
-
-\clearpage
-\markboth{}{}% no page header
-\setcounter{page}{1}% Start page numbers from 'I' (Roman 1)
-\pagestyle{footeronly}
-\justifying
-
-% Set default font
-\isdissertation{
-	\fontgeorgia{9.5}{11}
-}{%
-	\fontgeorgia{11}{12.5}
-}%
-
-$if(abstract)$
-\isdissertation{\cleardoublepage}{\clearpage}
-\pdfbookmark[section]{Abstract}{abstract} % CHANGE To include an entry in the bookmarks section of the PDF
-\chapter*{Abstract}
-$abstract$
-$endif$
-
-% Only if dissertation or thesis!
-\isdissertation{
-	\isdissertation{\cleardoublepage}{\clearpage}
-	\pdfbookmark[section]{Sammanfattning}{sammanfattning} % CHANGE To include an entry in the bookmarks section of the PDF
-	\begin{otherlanguage}{swedish}
-	\chapter*{Sammanfattning}
-	$if(his-metadata.sammanfattning)$
-	$his-metadata.sammanfattning$
-	$else$
-	No sammanfattning entered, it's needed for the dissertation and licentiate thesis. It should be placed under his-metadata in the YAML options.
-	$endif$
-	\end{otherlanguage}
-}{}
-
-$if(his-metadata.acknowledgements)$
-% Acknowledgements if you want to add those.
-\isdissertation{\cleardoublepage}{\clearpage}
-\pdfbookmark[section]{Acknowledgements}{acknowledgements} % CHANGE To include an entry in the bookmarks section of the PDF
-\chapter*{Acknowledgements}
-$his-metadata.acknowledgements$
-$endif$
-    
-$if(his-metadata.ownpublications)$
-% Can be formatted in different ways, see the manual.
-\begin{ownpublications}
+\begin{frontmatter}
+  $if(abstract)$
+  \thesisabstract{$abstract$}
+  $endif$
+  
+  $if(his-metadata.sammanfattning)$
+  \thesissammanfattning{$his-metadata.sammanfattning$}
+  $else$
+  \thesissammanfattning{No sammanfattning entered, it's needed for the dissertation and licentiate thesis. It should be placed under his-metadata in the YAML options.}
+  $endif$
+  
+  $if(his-metadata.acknowledgements)$
+  \thesisacknowledgements{$his-metadata.acknowledgements$}
+  $endif$
+  
+  $if(his-metadata.ownpublications)$
+  % Can be formatted in different ways, see the manual.
+  \begin{ownpublications}
 	%\highrelevancepublications{fischer2017doctoraldissertationmanual,fischer2017doctoraldissertationmanual}
 	%\lowrelevancepublications{}
 	%\authorspublication[Authors contribution]{fischer2017doctoraldissertationmanual}
@@ -73,30 +23,12 @@ $if(his-metadata.ownpublications)$
 	$his-metadata.ownpublications$
 	$endfor$
 
-\end{ownpublications}
-$endif$
-
-$if(toc)$
-\tableofcontents
-$endif$
-$if(lof)$
-\listoffigures
-$endif$
-$if(lot)$
-\listoftables
-$endif$
+  \end{ownpublications}
+  $endif$
+\end{frontmatter}
 
 $if(his-metadata.acronyms)$
-\isdissertation{\cleardoublepage}{\clearpage}
-\pdfbookmark[section]{Abbreviations}{abbreviations} % CHANGE To include an entry in the bookmarks section of the PDF
-\chapter*{Abbreviations}
-\renewcommand{\glossarysection}[2][]{} % Remove the added section in printglossary
-\printglossary
 $endif$
-
-\isdissertation{\cleardoublepage}{\clearpage}
-\setcounter{page}{1}% Start page numbers from '1'
-\pagestyle{headings}
 
 %% Start of contents:
 
