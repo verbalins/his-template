@@ -47,9 +47,9 @@ his-metadata:
   sammanfattning: Abstract in Swedish
   shortabstract: Summary on the back of the thesis
   fullarticles: |
-    \fullarticle[scale=.7,trim={0mm 5mm 0mm 5mm},pages=-]{fischer2017doctoraldissertationmanual}{manual.pdf}[\href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{\ccbyncnd}]
-    \fullarticle[scale=.7,trim={0mm 5mm 0mm 5mm},pages=1]{fischer2017doctoraldissertationmanual}{manual.pdf}[\copyright{} 2018 University of Skövde. Reprinted, with permission, from]
-    \fullarticle[scale=.7,trim={0mm 5mm 0mm 5mm},pages=1]{fischer2017doctoraldissertationmanual}{manual.pdf}[Reprinted from][with permission from University of Skövde.]
+    \fullarticle[scale=.7,trim={0mm 5mm 0mm 5mm},pages=-][\href{https://creativecommons.org/licenses/by-nc-nd/4.0/}{\ccbyncnd}]{fischer2017doctoraldissertationmanual}{manual.pdf}
+    \fullarticle[scale=.7,trim={0mm 5mm 0mm 5mm},pages=1][\copyright{} 2018 University of Skövde. Reprinted, with permission, from]{fischer2017doctoraldissertationmanual}{manual.pdf}
+    \fullarticle[scale=.7,trim={0mm 5mm 0mm 5mm},pages=1][Reprinted from][with permission from University of Skövde.]{fischer2017doctoraldissertationmanual}{manual.pdf}
   acronyms: |
     \newacronym{moo}{MOO}{Multi-Objective Optimization}
     \newacronym{sbo}{SBO}{Simulation-Based Optimization}

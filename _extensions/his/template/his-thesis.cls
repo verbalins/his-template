@@ -648,42 +648,42 @@ luatexbase.add_to_callback("post_linebreak_filter",orangebox,"orangebox")
 
 % CHANGE to incorporate additional optional arguments to this function.
 % First optional argument is optional arguments for includepdf, defaults to scale=.85,clip=true,pages=-. #1
-% First mandatory argument is a path to the pdf file. #2
-% Second mandatory argument is the reference code to the article. #3
-% Second optional argument is the prefix to the full citation. #4
-% Third optional argument is the suffix to the full citation. #5
-\NewDocumentCommand \fullarticle {O{scale=.85,clip=true,pages=-} m m O{} O{}}{%
-\stepcounter{ownpublicationsenumi}
-\isdissertation{\cleardoublepage}{\clearpage}
-\phantomsection
-\addcontentsline{toc}{section}{\texorpdfstring{Paper~\Roman{ownpublicationsenumi}: \citetitleverbatim{#2}}{Paper~\Roman{ownpublicationsenumi}}}% CHANGE added texorpdfstring to fix hyperref linking. % section-like line in ToC, but does not appear in main text body
-\IfNoValueTF {#4}%
-    { \IfNoValueTF {#5}% No value for #4, then check #5.
-        {\partlike[\MakeUppercase{Paper~\Roman{ownpublicationsenumi}}]{\citetitleuppercase{#2}}}
-        {\partlike[\MakeUppercase{Paper~\Roman{ownpublicationsenumi}}]{\citetitleuppercase{#2}}[\fullcite{#2} #5]}
-    }%
-    { \IfNoValueTF {#5}% Value for #4, then check #5.
-        {\partlike[\MakeUppercase{Paper~\Roman{ownpublicationsenumi}}]{\citetitleuppercase{#2}}[\fullcite{#2} #5]}
-        {\partlike[\MakeUppercase{Paper~\Roman{ownpublicationsenumi}}]{\citetitleuppercase{#2}}[#4 \fullcite{#2} #5]}
-    }% nice purple page with article's title, like special page for parts, but does not appear in ToC and does not try to make it uppercase
-%\nopagecolor
-\ifthenelse{\boolean{@isfinal}}{%
-    \newgeometry{margin=0cm}%
-    \includepdf[#1,noautoscale,clip=true]{#3}% include article's PDF, but scale it to fit the smaller pages' size
-    \restoregeometry%
-}{%
-    \includepdf[#1,frame=true]{#3}% include article's PDF, but keep author's scaling intact
-}
+% Second optional argument is the prefix to the full citation. #2
+% Third optional argument is the suffix to the full citation. #3
+% First mandatory argument is a path to the pdf file. #4
+% Second mandatory argument is the reference code to the article. #5
+\NewDocumentCommand \fullarticle {O{scale=.85,clip=true,pages=-} O{} O{} m m }{%
+	\stepcounter{ownpublicationsenumi}
+	\isdissertation{\cleardoublepage}{\clearpage}
+	\phantomsection
+	\addcontentsline{toc}{section}{\texorpdfstring{Paper~\Roman{ownpublicationsenumi}: \citetitleverbatim{#2}}{Paper~\Roman{ownpublicationsenumi}}}% CHANGE added texorpdfstring to fix hyperref linking. % section-like line in ToC, but does not appear in main text body
+	\IfNoValueTF {#2}%
+		{ \IfNoValueTF {#3}% No value for #2, then check #3.
+			{\partlike[\MakeUppercase{Paper~\Roman{ownpublicationsenumi}}]{\citetitleuppercase{#4}}}
+			{\partlike[\MakeUppercase{Paper~\Roman{ownpublicationsenumi}}]{\citetitleuppercase{#4}}[\fullcite{#4} #3]}
+		}%
+		{ \IfNoValueTF {#3}% Value for #2, then check #3.
+			{\partlike[\MakeUppercase{Paper~\Roman{ownpublicationsenumi}}]{\citetitleuppercase{#4}}[\fullcite{#4} #3]}
+			{\partlike[\MakeUppercase{Paper~\Roman{ownpublicationsenumi}}]{\citetitleuppercase{#4}}[#2 \fullcite{#4} #3]}
+		}% nice purple page with article's title, like special page for parts, but does not appear in ToC and does not try to make it uppercase
+
+	\ifthenelse{\boolean{@isfinal}}{%
+		\newgeometry{margin=0cm}%
+		\includepdf[#1,noautoscale,clip=true]{#5}% include article's PDF, but scale it to fit the smaller pages' size
+		\restoregeometry%
+	}{%
+		\includepdf[#1,frame=true]{#5}% include article's PDF, but keep author's scaling intact
+	}
 }%
 
 \newenvironment{fullarticles}[1][Previously Published Articles]{%
-\markboth{}{}% no page header
-\isdissertation{\cleardoublepage}{\clearpage}
-\phantomsection
-\part*{Previously Published Articles}
-\addcontentsline{toc}{part}{\texorpdfstring{\MakeUppercase{#1}}{#1}}% part-like line in ToC, but does not appear in main text body
+	\markboth{}{}% no page header
+	\isdissertation{\cleardoublepage}{\clearpage}
+	\phantomsection
+	\part*{Previously Published Articles}
+	\addcontentsline{toc}{part}{\texorpdfstring{\MakeUppercase{#1}}{#1}}% part-like line in ToC, but does not appear in main text body
 }{%
-\isdissertation{\cleardoublepage}{\clearpage}
+	\isdissertation{\cleardoublepage}{\clearpage}
 }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
