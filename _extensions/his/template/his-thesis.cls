@@ -386,6 +386,9 @@
       \step[fieldsource=tempsortname]
       \step[fieldset=sortname, origfieldval]
     }
+	\map[overwrite=true]{
+	  \step[fieldset=month,null]
+	}
   }
 }
 
